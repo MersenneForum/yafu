@@ -101,8 +101,8 @@ void new_poly_a(static_conf_t *sconf, dynamic_conf_t *dconf)
 
 	z tmp, tmp2, tmp3, *poly_a = &poly->poly_a;
 	int j, *qli = poly->qlisort, *s = &poly->s;
-	uint32 i,randindex, mindiff,a1,poly_low_found=0,target_bits;
-	uint32 potential_a_factor, found_a_factor;
+	uint32 i,randindex = 0, mindiff,a1,poly_low_found=0,target_bits;
+	uint32 potential_a_factor = 0, found_a_factor;
 	uint32 afact[20];
 	double target_mul = 0.9;
 	FILE *sieve_log = sconf->obj->logfile;
@@ -1172,6 +1172,7 @@ void firstRoots(static_conf_t *sconf, dynamic_conf_t *dconf)
 	}
 
 	check_bound = fb->med_B + BUCKET_ALLOC/2;
+	logp = fb->list->logprime[fb->med_B-1];
 	for (i=fb->med_B;i<fb->large_B;i++)
 	{
 		CHECK_NEW_SLICE(i);
@@ -1216,6 +1217,7 @@ void firstRoots(static_conf_t *sconf, dynamic_conf_t *dconf)
 
 	}
 
+	logp = fb->list->logprime[fb->large_B-1];
 	for (i=fb->large_B;i<fb->B;i++)
 	{
 		CHECK_NEW_SLICE(i);
